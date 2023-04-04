@@ -53,4 +53,9 @@ public class Task {
     public String getEndTime(){
         return taskTime.plusMinutes(numMinutes).toString();
     }
+
+    @Override
+    public String toString(){
+        return String.format("%s %s", taskName, scheduled ? String.format("@ %s until %s", getStartTime(), getEndTime()) : "Unscheduled");
+    }
 }

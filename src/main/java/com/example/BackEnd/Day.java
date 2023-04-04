@@ -9,11 +9,12 @@ public class Day {
     private Date dateOfDay; //the date of the day
 
     public Day(Date date) {
+        tasks = new ArrayList<Task>();
         dateOfDay = date;
     }
 
     //return all of the tasks of the current day
-    public Object[] geTasks(){
+    public Object[] getTasks(){
         return tasks.toArray();
     }
 
@@ -38,6 +39,6 @@ public class Day {
 
     //get the full day and date as a string
     public String getDateAndDay(){
-        return new SimpleDateFormat("E dd/MM/yy").format(dateOfDay);
+        return new SimpleDateFormat("EE dd/MM/yy").format(dateOfDay);
     }
 }
