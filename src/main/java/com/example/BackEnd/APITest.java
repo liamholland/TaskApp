@@ -1,7 +1,6 @@
 package com.example.BackEnd;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -13,8 +12,8 @@ public class APITest {
         Day newDay = new Day(today);    //create a new day
 
         //add a couple of tasks
-        newDay.addTask(new Task("New Task", LocalDate.now()));
-        newDay.addTask(new Task("Second Task", LocalDate.now(), LocalTime.of(23, 0), 60));
+        newDay.addTask(new Task("New Task", newDay));
+        newDay.addTask(new Task("Second Task", newDay, LocalTime.of(23, 0), 60));
         
         //print out the day you are on
         System.out.println(newDay.getDay());
@@ -35,8 +34,4 @@ public class APITest {
 
     // you must be able to edit data of the present day or days in the future
     // retitive tasks should not be written to every day - seperate file?
-    
-   // a DayViewer object can handle the data currently displayed
-   // the data can be edited on the page, without writing it
-   // compression for days in the past? 
 }

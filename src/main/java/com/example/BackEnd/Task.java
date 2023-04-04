@@ -6,19 +6,19 @@ import java.time.*;
 public class Task {
     //Is an object that can be created and scheduled on a certain date and time
     private String taskName;
-    private LocalDate taskDate;     //date of the task
+    private Day taskDay;     //date of the task
     private boolean scheduled;    //is the task scheduled for a certain time
     private boolean repetitive;   //is the task repeated every day
     private LocalTime taskTime;     //start time of the task - used if scheduled
     private long numMinutes;         //number of minutes to be spent on the task
 
-    public Task(String name, LocalDate date){
+    public Task(String name, Day day){
         taskName = name;
-        taskDate = date;
+        taskDay = day;
     }
 
-    public Task(String name, LocalDate date, LocalTime time, long duration){
-        this(name, date);
+    public Task(String name, Day day, LocalTime time, long duration){
+        this(name, day);
         taskTime = time;
         numMinutes = duration;
         scheduled = true;
@@ -44,6 +44,10 @@ public class Task {
         scheduled = true;
     }
 
+    public Day getDay(){
+        return taskDay;
+    }
+
     //start time of the task
     public String getStartTime(){
         return taskTime.toString();
@@ -56,6 +60,6 @@ public class Task {
 
     @Override
     public String toString(){
-        return String.format("%s %s", taskName, scheduled ? String.format("@ %s until %s", getStartTime(), getEndTime()) : "Unscheduled");
+        return String.format("%s %s", taskName, scheduled ? String.format("on %s @ %s until %s", taskDay.getDay(), getStartTime(), getEndTime()) : "Unscheduled");
     }
 }
