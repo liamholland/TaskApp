@@ -1,9 +1,10 @@
 package com.example.BackEnd;
 
+import java.io.Serializable;
 import java.time.*;
 
 //object created by the user to track a specific activity
-public class Task {
+public class Task implements Serializable{
     //Is an object that can be created and scheduled on a certain date and time
     private String taskName;
     private Day taskDay;     //date of the task
@@ -11,10 +12,12 @@ public class Task {
     private boolean repetitive;   //is the task repeated every day
     private LocalTime taskTime;     //start time of the task - used if scheduled
     private long numMinutes;         //number of minutes to be spent on the task
-
+    private boolean complete;   //has the task been completed
+    
     public Task(String name, Day day){
         taskName = name;
         taskDay = day;
+        complete = false;
     }
 
     public Task(String name, Day day, LocalTime time, long duration){
@@ -31,6 +34,18 @@ public class Task {
     //is the task repetitive - i.e. does it occur every day
     public boolean isRepetitive(){
         return repetitive;
+    }
+
+    public void markRepetitive(){
+        repetitive = true;
+    }
+
+    public boolean isCompleted(){
+        return complete;
+    }
+
+    public void markComplete(){
+        complete = true;
     }
 
     //is the task scheduled

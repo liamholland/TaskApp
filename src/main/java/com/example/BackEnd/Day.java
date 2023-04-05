@@ -1,14 +1,19 @@
 package com.example.BackEnd;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
 
-public class Day {
+public class Day implements Serializable{
     private ArrayList<Task> tasks;  //the tasks assciated with this day
     private final LocalDate dateOfDay; //the date of the day
-
+    
+    //fields to hold linked list references
+    private Day before;
+    private Day after;
+    
     public Day(LocalDate date) {
         tasks = new ArrayList<Task>();
         dateOfDay = date;
@@ -51,6 +56,27 @@ public class Day {
     //is this day today
     public boolean isToday(){
         return LocalDate.now().equals(dateOfDay);
+    }
+
+    //get the day that comes before this one
+    public Day before(){
+        return before;
+    }
+
+    public Day after(){
+        return after;
+    }
+
+    public void setBefore(Day day){
+        if(day.getDate().isBefore(dateOfDay)){
+            before = day;
+        }
+    }
+
+    public void setAfter(Day day){
+        if(day.getDate().isAfter(dateOfDay)){
+            after = day;
+        }
     }
 
     @Override

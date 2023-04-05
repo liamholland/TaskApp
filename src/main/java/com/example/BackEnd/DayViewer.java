@@ -11,6 +11,6 @@ public class DayViewer {
    private String currentDate; //the current date as displayed to the user
 
    public DayViewer(){
-    //load days from a file and set the one that matches todays date to the current day
+    
    }
 }

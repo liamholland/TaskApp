@@ -17,3 +17,9 @@ buildNumber.properties
 
 # Log file
 *.log
+
+# save files
+saves/
+
+#ignore
+.gitignore
