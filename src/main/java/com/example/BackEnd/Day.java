@@ -1,14 +1,15 @@
 package com.example.BackEnd;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Day {
     private ArrayList<Task> tasks;  //the tasks assciated with this day
-    private Date dateOfDay; //the date of the day
+    private final LocalDate dateOfDay; //the date of the day
 
-    public Day(Date date) {
+    public Day(LocalDate date) {
         tasks = new ArrayList<Task>();
         dateOfDay = date;
     }
@@ -34,11 +35,31 @@ public class Day {
 
     //gets the name of the day as a string
     public String getDay(){
-        return new SimpleDateFormat("E").format(dateOfDay);
+        return dateOfDay.getDayOfWeek().toString();
     }
 
-    //get the full day and date as a string
+    //gets the date object of the Day
+    public LocalDate getDate(){
+        return dateOfDay;
+    }
+
+    //gets the full day and date as a string
     public String getDateAndDay(){
-        return new SimpleDateFormat("EE dd/MM/yy").format(dateOfDay);
+        return dateOfDay.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
+    }
+
+    //is this day today
+    public boolean isToday(){
+        return LocalDate.now().equals(dateOfDay);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof Day)){
+            return false;
+        }
+
+        Day compDay = (Day)o;
+        return compDay.getDate().equals(dateOfDay);
     }
 }

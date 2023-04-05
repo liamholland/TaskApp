@@ -62,4 +62,14 @@ public class Task {
     public String toString(){
         return String.format("%s %s", taskName, scheduled ? String.format("on %s @ %s until %s", taskDay.getDay(), getStartTime(), getEndTime()) : "Unscheduled");
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(!(o instanceof Task)){
+            return false;
+        }
+
+        Task compTask = (Task)o;
+        return (compTask.getName().equals(taskName) && compTask.getDay().equals(taskDay));
+    }
 }

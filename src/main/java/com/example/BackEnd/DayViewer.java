@@ -6,4 +6,11 @@ public class DayViewer {
     //this is the answer
     //next and previous, checking where the day is and making calls to save and load functions should be done from here
    // the data can be edited on the page, without writing it to a file
+
+   private Day currentDay;  //the current day that is being viewed
+   private String currentDate; //the current date as displayed to the user
+
+   public DayViewer(){
+    //load days from a file and set the one that matches todays date to the current day
+   }
 }
