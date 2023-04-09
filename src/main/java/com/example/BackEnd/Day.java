@@ -19,6 +19,10 @@ public class Day implements Serializable{
         dateOfDay = date;
     }
 
+    /*
+     * TASK MANAGEMENT
+     */
+
     //return all of the tasks of the current day
     public Task[] getTasks(){
         return tasks.toArray(new Task[0]);
@@ -37,6 +41,10 @@ public class Day implements Serializable{
             tasks.remove(t);
         }
     }
+
+    /*
+     * DATE MANAGEMENT
+     */
 
     //gets the name of the day as a string
     public String getDay(){
@@ -68,13 +76,20 @@ public class Day implements Serializable{
     }
 
     public void setBefore(Day day){
-        if(day.getDate().isBefore(dateOfDay)){
+        if(day == null){
+            before = null;
+        }
+        else if(day.getDate().isBefore(dateOfDay)){
             before = day;
         }
+        
     }
 
     public void setAfter(Day day){
-        if(day.getDate().isAfter(dateOfDay)){
+        if(day == null){
+            after = null;
+        }
+        else if(day.getDate().isAfter(dateOfDay)){
             after = day;
         }
     }

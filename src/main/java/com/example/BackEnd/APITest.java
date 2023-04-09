@@ -17,6 +17,21 @@ public class APITest {
         dayViewer.nextDay();
 
         System.out.println(dayViewer);
+
+        dayViewer.lastDay();
+        dayViewer.lastDay();
+        dayViewer.lastDay();
+
+        dayViewer.saveDay();
+        dayViewer.addTask(new Task("Old Task", dayViewer.getCurrentDay()));
+
+        System.out.println(dayViewer);
+
+        dayViewer.jumpToToday();
+        dayViewer.saveDay();
+        dayViewer.addTask(new Task("New Task", dayViewer.getCurrentDay()));
+
+        System.out.println(dayViewer);
     }
     
 

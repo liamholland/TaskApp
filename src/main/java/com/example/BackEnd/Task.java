@@ -80,7 +80,7 @@ public class Task implements Serializable{
 
     @Override
     public boolean equals(Object o){
-        if(!(o instanceof Task)){
+        if(!(o instanceof Task) || o == null){
             return false;
         }
 

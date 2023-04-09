@@ -26,7 +26,7 @@ public class Store {
     }
 
     //read the saved data from the file
-    public static Day read(){
+    public static Day load(){
         try{
             FileInputStream fStream = new FileInputStream(savePath);
             ObjectInputStream oStream = new ObjectInputStream(fStream);
@@ -35,7 +35,7 @@ public class Store {
             fStream.close();
             return day;
         }catch(Exception e){
-            System.out.println(e);
+            System.out.println("No Save File");
             return null;
         }
     }
