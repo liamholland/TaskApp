@@ -20,8 +20,8 @@ public class Day implements Serializable{
     }
 
     //return all of the tasks of the current day
-    public Object[] getTasks(){
-        return tasks.toArray();
+    public Task[] getTasks(){
+        return tasks.toArray(new Task[0]);
     }
 
     //add a task to the day
