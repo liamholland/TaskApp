@@ -12,6 +12,11 @@ public class APITest {
         DayViewer dayViewer = new DayViewer();
 
         System.out.println(dayViewer);
+
+        dayViewer.nextDay();
+        dayViewer.nextDay();
+
+        System.out.println(dayViewer);
     }
     
 

@@ -26,10 +26,16 @@ public class DayViewer {
         }
     }
 
-    public String getCurrentDate(){
-        return currentDate.toString();
+    //goes forward by one day
+    public void nextDay(){
+        currentDay = goToDate(currentDate.plusDays(1));
     }
 
+    //goes back one day
+    public void lastDay(){
+        currentDay = goToDate(currentDate.minusDays(1));
+    }
+    
     public Day goToDate(LocalDate date){
         Day day = currentDay;   //create a new day and start with the current date
         
@@ -52,14 +58,26 @@ public class DayViewer {
         else{
             currentDate = day.getDate();    //otherwise set the date to the date of the new currentday
         }
-
+        
         return day; //return the day, which could be null
+    }
+    
+    //get the current date as a string
+    public String getCurrentDate(){
+        return currentDate.toString();
     }
 
     @Override
     public String toString(){
         StringBuilder s = new StringBuilder();
-        s.append(String.format("Today is %s\nTasks:\n", currentDay.getDateAndDay()));
+        s.append("Viewing ");
+        if(currentDay.isToday()){
+            s.append("Today\nTasks:\n");
+        }
+        else{
+            s.append(String.format("%s\nTasks:\n", currentDay.getDateAndDay()));
+        }
+
         if(currentDay == null){
             for(Task t : currentDay.getTasks()){
                 s.append(t);
