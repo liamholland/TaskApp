@@ -6,3 +6,7 @@
 .button:hover {
     -fx-background-color: blue;
 }
+
+.titledpane {
+    -fx-background-color: red;
+}

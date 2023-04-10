@@ -7,11 +7,11 @@ import javafx.scene.layout.VBox;
 
 public class PrimaryController {
 
-    @FXML private VBox main;
+    @FXML private VBox taskSection;
 
     @FXML
     private void createNewTask() throws IOException {
         CustomControl cc = new CustomControl("New Task");
-        main.getChildren().add(cc);
+        taskSection.getChildren().add(cc);
     }
 }
