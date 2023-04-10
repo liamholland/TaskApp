@@ -16,9 +16,9 @@
       <TitledPane text="Project Pane" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
       <TitledPane text="Completion Pane" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
 
-      <HBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <HBox fx:id="taskHeader" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Button onAction="#createNewTask">Create New Task</Button>
+            <Button fx:id="createTaskButton" onAction="#createNewTask">Create New Task</Button>
          </children>
       </HBox>
       <!-- Section where tasks are displayed -->
