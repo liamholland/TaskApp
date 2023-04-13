@@ -1,8 +1,5 @@
 package com.example.BackEnd;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 
 //this file is used to test the various pieces of functionality of the API during development
 //will not be used in the final version as the API will be implemented through the frontend
@@ -13,23 +10,8 @@ public class APITest {
 
         System.out.println(dayViewer);
 
-        dayViewer.nextDay();
-        dayViewer.nextDay();
-
-        System.out.println(dayViewer);
-
-        dayViewer.lastDay();
-        dayViewer.lastDay();
-        dayViewer.lastDay();
-
+        dayViewer.addTask(new Task("New Task", "Description", dayViewer.getCurrentDay()));
         dayViewer.saveDay();
-        dayViewer.addTask(new Task("Old Task", dayViewer.getCurrentDay()));
-
-        System.out.println(dayViewer);
-
-        dayViewer.jumpToToday();
-        dayViewer.saveDay();
-        dayViewer.addTask(new Task("New Task", dayViewer.getCurrentDay()));
 
         System.out.println(dayViewer);
     }

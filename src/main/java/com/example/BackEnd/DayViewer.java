@@ -161,7 +161,7 @@ public class DayViewer {
         else{
             s.append(String.format("%s\n", currentDate.equals(LocalDate.now()) ? "Today" : getCurrentDateAsString()));
 
-            s.append("None\n");
+            s.append("None Because day is null\n");
         }
         return s.toString();
     }

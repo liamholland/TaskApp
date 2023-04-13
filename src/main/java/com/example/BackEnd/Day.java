@@ -103,4 +103,19 @@ public class Day implements Serializable{
         Day compDay = (Day)o;
         return compDay.getDate().equals(dateOfDay);
     }
+
+    @Override
+    public String toString(){
+        StringBuilder s = new StringBuilder();
+        s.append("Day: ");
+        s.append(getDateAndDay());
+        s.append("\n");
+        s.append("Tasks: \n");
+        for(Task t : getTasks()){
+            s.append(t);
+            s.append("\n");
+        }
+
+        return s.toString();
+    }
 }

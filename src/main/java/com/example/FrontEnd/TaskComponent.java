@@ -1,21 +1,21 @@
 package com.example.FrontEnd;
 
-import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import com.example.BackEnd.Task;
 
 public class TaskComponent extends VBox {
-    @FXML private TextField textField;
+    @FXML private Label name;
+    @FXML private Label time;
+    @FXML private Label description;
 
-    public TaskComponent(String text) {
+    public TaskComponent(Task task) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "task.fxml"));
@@ -35,18 +35,25 @@ public class TaskComponent extends VBox {
             throw new RuntimeException(exception);
         }
 
-        setText(text);
+        setName(task.getName());
+        
+        if(task.isScheduled()){
+            setTime(task.getStartTime());
+        }
+
+        setDes(task.getDescription());
+
     }
 
-    public String getText() {
-        return textProperty().get();
+    public void setName(String value) {
+        name.textProperty().set(value);
     }
 
-    public void setText(String value) {
-        textProperty().set(value);
+    public void setTime(String value) {
+        time.textProperty().set(value);
     }
 
-    public StringProperty textProperty() {
-        return textField.textProperty();
+    public void setDes(String value) {
+        description.textProperty().set(value);
     }
 }

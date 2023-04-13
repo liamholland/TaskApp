@@ -7,21 +7,23 @@ import java.time.*;
 public class Task implements Serializable{
     //Is an object that can be created and scheduled on a certain date and time
     private String taskName;
-    private Day taskDay;     //date of the task
+    private String taskDescription;
+    private Day taskDay;     //day of the task
     private boolean scheduled;    //is the task scheduled for a certain time
     private boolean repetitive;   //is the task repeated every day
     private LocalTime taskTime;     //start time of the task - used if scheduled
     private long numMinutes;         //number of minutes to be spent on the task
     private boolean complete;   //has the task been completed
     
-    public Task(String name, Day day){
+    public Task(String name, String description, Day day){
         taskName = name;
+        taskDescription = description;
         taskDay = day;
         complete = false;
     }
 
-    public Task(String name, Day day, LocalTime time, long duration){
-        this(name, day);
+    public Task(String name, String description, Day day, LocalTime time, long duration){
+        this(name, description, day);
         taskTime = time;
         numMinutes = duration;
         scheduled = true;
@@ -71,6 +73,16 @@ public class Task implements Serializable{
     //end time of the task
     public String getEndTime(){
         return taskTime.plusMinutes(numMinutes).toString();
+    }
+
+    public String getDescription(){
+        return taskDescription;
+    }
+
+    public void setDescription(String d){
+        if(d != null){
+            taskDescription = d;
+        }
     }
 
     @Override
