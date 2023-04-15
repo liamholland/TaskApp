@@ -14,7 +14,13 @@
    <children>
       <TitledPane text="Calendar Pane" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
       <TitledPane text="Project Pane" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-      <TitledPane text="Completion Pane" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+      <HBox fx:id="completionPane" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
+         <children>
+            <Button fx:id="navPreviousDayButton" onAction="#goToPreviousDay">Previous Day</Button>
+            <Label fx:id="currentDateLabel"/>
+            <Button fx:id="navNextDayButton" onAction="#goToNextDay">Next Day</Button>
+         </children>
+      </HBox>
 
       <HBox fx:id="taskHeader" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>

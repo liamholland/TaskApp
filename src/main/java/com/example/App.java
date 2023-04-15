@@ -33,9 +33,6 @@ public class App extends Application {
         controller.setDayViewer(dayViewer);
 
         controller.displayTasksForDay();
-
-        // APITest test = new APITest();
-        // test.test();
     }
 
     public static void main(String[] args) {

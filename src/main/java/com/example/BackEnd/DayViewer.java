@@ -65,11 +65,12 @@ public class DayViewer {
 
     //add a task to the current day
     public void addTask(Task task){
-        //if the current day has a day simply add the task and save
-        if(currentDay != null){
-            currentDay.addTask(task);
-            Store.save(currentDay);
+        if(currentDay == null){
+            currentDay = new Day(currentDate);
         }
+
+        currentDay.addTask(task);
+        Store.save(currentDay);
     }
 
     //goes forward by one day
@@ -128,6 +129,10 @@ public class DayViewer {
     //get the current date as a string
     public String getCurrentDateAsString(){
         return currentDate.toString();
+    }
+
+    public LocalDate getCurrentDate(){
+        return currentDate;
     }
 
     public Day getCurrentDay(){
