@@ -15,7 +15,10 @@ public class TaskComponent extends VBox {
     @FXML private Label time;
     @FXML private Label description;
 
-    public TaskComponent(Task task) {
+    private Task task;
+
+    public TaskComponent(Task createdTask) {
+        task = createdTask; //save the value of the task created in the task creator
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "task.fxml"));
@@ -45,15 +48,21 @@ public class TaskComponent extends VBox {
 
     }
 
-    public void setName(String value) {
+    private void setName(String value) {
         name.textProperty().set(value);
     }
 
-    public void setTime(String value) {
+    private void setTime(String value) {
         time.textProperty().set(value);
     }
 
-    public void setDes(String value) {
+    private void setDes(String value) {
         description.textProperty().set(value);
+    }
+
+    @FXML
+    //delete this task from its day
+    private void deleteThisTask(){
+        task.getDay().removeTask(task);
     }
 }

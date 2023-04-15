@@ -62,6 +62,7 @@ public class TaskCreator extends VBox {
         return !(desText == null || desText.equals("")) && !(nameText == null || nameText.equals(""));
     }
 
+    //turn the creator into an actual task
     public Task getTask(Day day){
         if(!isDataValid()){
             return null;

@@ -18,16 +18,26 @@ public class PrimaryController {
     @FXML private Label currentDateLabel;
 
     private DayViewer dayViewer;    //reference to the backend api
-    
+
     //allows child elements to save a task
     public void saveTask(TaskCreator creator){
+        //add a task, provided by the task creator, with the current day, which may have to be created
         dayViewer.addTask(creator.getTask(dayViewer.getCurrentDay() == null ? new Day(dayViewer.getCurrentDate()) : dayViewer.getCurrentDay()));
+
+        //save the day
         dayViewer.saveDay();
+
+        //remove the creator from the gui
         taskSection.getChildren().remove(creator);
+
+        //refresh the display
         displayTasksForDay();
+
+        //enable the task creation button
         createTaskButton.setDisable(false);
     }
 
+    //used at initialisation to get a reference to the backend api
     public void setDayViewer(DayViewer d){
         dayViewer = d;
     }
