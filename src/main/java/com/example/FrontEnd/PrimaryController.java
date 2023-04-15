@@ -50,20 +50,17 @@ public class PrimaryController {
                 taskSection.getChildren().add(component);
             }  
         }
-        else{
-            System.out.println("Day is Null");
-        }
     }
 
     @FXML
     private void goToPreviousDay(){
-        dayViewer.goToDate(dayViewer.getCurrentDate().minusDays(1));
+        dayViewer.lastDay();
         displayTasksForDay();
     }
 
     @FXML
     private void goToNextDay(){
-        dayViewer.goToDate(dayViewer.getCurrentDate().plusDays(1));
+        dayViewer.nextDay();
         displayTasksForDay();
     }
 }

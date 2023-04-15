@@ -88,16 +88,17 @@ public class DayViewer {
     }
     
     //jump to a specified date and get the save if there is one
-    public Day goToDate(LocalDate targetDate){
+    private Day goToDate(LocalDate targetDate){
         Day day = currentDay == null ? Store.load() : currentDay;   //create a new day and start with the current date or the last saved day
-        
+        currentDay = null;  //reset the current day
+
         if(day == null){
             currentDate = targetDate; //set the date to the target date
             return day; // this is null
         }
 
         //day != null
-        
+
         if(day.getDate().isAfter(targetDate)){  //if the targetdate is before the current date we want to go backwards
             while(day.getDate().isAfter(targetDate) && day.before() != null){
                 day = day.before();
