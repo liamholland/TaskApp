@@ -30,56 +30,51 @@ public class DayViewer {
     private void createDay(){
         Day saveDay = new Day(currentDate);
 
+        Day searchPoint = Store.load(); //start at the last saved day
+
         //insert it into the linked list
-        if(Store.load() == null){   //if there is no linked list
+        if(searchPoint == null){   //if there is no linked list
             currentDay = saveDay;    //just set current day and return
             Store.save(currentDay);
             return;
         }
         
         //else insert it into the linked list in the correct position
-        Day searchPoint = Store.load(); //start at the last saved day
+        //this involves finding where to place the node
 
         //if the last saved day is before the current date, i need to go forward until i reach the day before the current date
         if(searchPoint.getDate().isBefore(currentDate)){
-            //if there is no after the saveDay is the new after
-            if(searchPoint.after() == null){
-                searchPoint.setAfter(saveDay);
-                saveDay.setBefore(searchPoint);
-            }
-            else{
+            //if there is no day after, the saveDay is the new after, i.e end of the linked list
+            if(searchPoint.after() != null){
+                //otherwise, i need to go forward until there is no next node, or the next node is too far
                 while(searchPoint.after() != null && searchPoint.after().getDate().isBefore(currentDate)){
                     searchPoint = searchPoint.after();
                 }
-
-                saveDay.setBefore(searchPoint);
-
+                
+                //if the searchpoint is 
                 if(searchPoint.after() != null){
                     saveDay.setAfter(searchPoint.after());
                     searchPoint.after().setBefore(saveDay);
                 }
-
-                searchPoint.setAfter(saveDay);
             }
+
+            saveDay.setBefore(searchPoint); //set the before to the searchpoint
+            searchPoint.setAfter(saveDay);
         }
         else if(searchPoint.getDate().isAfter(currentDate)){
-            if(searchPoint.before() == null){
-                searchPoint.setBefore(saveDay);
-                saveDay.setAfter(searchPoint);
-            }
-            else{
+            if(searchPoint.before() != null){
                 while(searchPoint.before() != null && searchPoint.before().getDate().isAfter(currentDate)){
-                    searchPoint = searchPoint.before();
+                   searchPoint = searchPoint.before();
                 }
 
-                saveDay.setAfter(searchPoint);
                 if(searchPoint.before() != null){
                     saveDay.setBefore(searchPoint.before());
                     searchPoint.before().setAfter(saveDay);
-                }
-
-                searchPoint.setBefore(saveDay);
+                }    
             }
+
+            saveDay.setAfter(searchPoint);
+            searchPoint.setBefore(saveDay);
         }
 
         //set the current day to the created day
