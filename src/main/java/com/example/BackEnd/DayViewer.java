@@ -44,24 +44,28 @@ public class DayViewer {
 
         //if the last saved day is before the current date, i need to go forward until i reach the day before the current date
         if(searchPoint.getDate().isBefore(currentDate)){
-            //if there is no day after, the saveDay is the new after, i.e end of the linked list
+           
+            //if the searchpoint is not the end of the linked list
             if(searchPoint.after() != null){
-                //otherwise, i need to go forward until there is no next node, or the next node is too far
+                
+                //go forward until you reach the node before the new node
                 while(searchPoint.after() != null && searchPoint.after().getDate().isBefore(currentDate)){
                     searchPoint = searchPoint.after();
                 }
                 
-                //if the searchpoint is 
+                //if the searchpoint is still not the end of the linked list
                 if(searchPoint.after() != null){
-                    saveDay.setAfter(searchPoint.after());
-                    searchPoint.after().setBefore(saveDay);
+                    saveDay.setAfter(searchPoint.after());  //set whatever is after it to the new nodes after
+                    searchPoint.after().setBefore(saveDay); //set whatever is after its before to the new node
                 }
             }
 
-            saveDay.setBefore(searchPoint); //set the before to the searchpoint
-            searchPoint.setAfter(saveDay);
+            saveDay.setBefore(searchPoint); //set the before of the new node to the searchpoint
+            searchPoint.setAfter(saveDay);  //set the searchpoints after to the new node
         }
         else if(searchPoint.getDate().isAfter(currentDate)){
+            //otherwise do the above in the opposite direction
+            
             if(searchPoint.before() != null){
                 while(searchPoint.before() != null && searchPoint.before().getDate().isAfter(currentDate)){
                    searchPoint = searchPoint.before();

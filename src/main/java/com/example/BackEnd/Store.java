@@ -26,6 +26,9 @@ public class Store {
     }
 
     //read the saved data from the file
+    //it will return a day, which could be anywhere in the linked list
+    //the assumption is that this will be closest to the current date
+    //for example, if last visited the day before, i would only have to traverse one day to get to the current date
     public static Day load(){
         try{
             FileInputStream fStream = new FileInputStream(savePath);
