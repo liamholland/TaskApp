@@ -15,9 +15,12 @@ public class TaskComponent extends VBox {
     @FXML private Label time;
     @FXML private Label description;
 
+    private PrimaryController parent;
     private Task task;
 
-    public TaskComponent(Task createdTask) {
+    public TaskComponent(Task createdTask, PrimaryController parent) {
+        this.parent = parent;
+
         task = createdTask; //save the value of the task created in the task creator
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
@@ -63,6 +66,6 @@ public class TaskComponent extends VBox {
     @FXML
     //delete this task from its day
     private void deleteThisTask(){
-        task.getDay().removeTask(task);
+        parent.deleteTask(task);
     }
 }

@@ -26,51 +26,104 @@ public class DayViewer {
         currentDate = LocalDate.now();
     }
 
-    //generally called before the addition of the first task on a day
-    public void saveDay(){
-        //only want to do this if the day does not exist
-        if(currentDay == null){
-            //create a new day for today
-            Day newDay = new Day(currentDate);
-    
-            //insert it into the linked list
-            if(Store.load() == null){   //if there is no linked list
-                currentDay = newDay;    //just set current day and return
-                Store.save(currentDay);
-                return;
-            }
-    
-            //find the first day in the list that precedes this day for the before day
-            //this is allowed to be null
-            Day searchPoint = Store.load();
-            do{
-                searchPoint = searchPoint.before();
-            }while(searchPoint != null && searchPoint.getDate().isAfter(currentDate));
-            newDay.setBefore(searchPoint);
-    
-            //find the first day in the list that succeeds this day for the after day
-            searchPoint = Store.load();
-            do{
-                searchPoint = searchPoint.after();
-            } while(searchPoint != null && searchPoint.getDate().isBefore(currentDate));
-            newDay.setAfter(searchPoint);
+    //create a day object and save it
+    private void createDay(){
+        Day saveDay = new Day(currentDate);
 
-            //set the current day to the created day
-            currentDay = newDay;
-
-            //save the linked list back to the save file
+        //insert it into the linked list
+        if(Store.load() == null){   //if there is no linked list
+            currentDay = saveDay;    //just set current day and return
             Store.save(currentDay);
+            return;
         }
+        
+        //else insert it into the linked list in the correct position
+        Day searchPoint = Store.load(); //start at the last saved day
+
+        //if the last saved day is before the current date, i need to go forward until i reach the day before the current date
+        if(searchPoint.getDate().isBefore(currentDate)){
+            //if there is no after the saveDay is the new after
+            if(searchPoint.after() == null){
+                searchPoint.setAfter(saveDay);
+                saveDay.setBefore(searchPoint);
+            }
+            else{
+                while(searchPoint.after() != null && searchPoint.after().getDate().isBefore(currentDate)){
+                    searchPoint = searchPoint.after();
+                }
+
+                saveDay.setBefore(searchPoint);
+
+                if(searchPoint.after() != null){
+                    saveDay.setAfter(searchPoint.after());
+                    searchPoint.after().setBefore(saveDay);
+                }
+
+                searchPoint.setAfter(saveDay);
+            }
+        }
+        else if(searchPoint.getDate().isAfter(currentDate)){
+            if(searchPoint.before() == null){
+                searchPoint.setBefore(saveDay);
+                saveDay.setAfter(searchPoint);
+            }
+            else{
+                while(searchPoint.before() != null && searchPoint.before().getDate().isAfter(currentDate)){
+                    searchPoint = searchPoint.before();
+                }
+
+                saveDay.setAfter(searchPoint);
+                if(searchPoint.before() != null){
+                    saveDay.setBefore(searchPoint.before());
+                    searchPoint.before().setAfter(saveDay);
+                }
+
+                searchPoint.setBefore(saveDay);
+            }
+        }
+
+        //set the current day to the created day
+        currentDay = saveDay;
+
+        //save the linked list back to the save file
+        Store.save(currentDay);
     }
 
     //add a task to the current day
     public void addTask(Task task){
         if(currentDay == null){
-            currentDay = new Day(currentDate);
+            createDay();
         }
-
+        
         currentDay.addTask(task);
         Store.save(currentDay);
+    }
+
+    //remove a task from the day
+    public void removeTask(Task task){
+        if(currentDay != null){
+            currentDay.removeTask(task);
+         
+            if(currentDay.getTasks().length == 0){
+                //the day needs to be deleted from the linked list
+                if(currentDay.before() != null){
+                    currentDay.before().setAfter(currentDay.after());
+                }
+
+                if(currentDay.after() != null){
+                    currentDay.after().setBefore(currentDay.before());
+                }
+                
+                Day saveDay = currentDay.before() == null ? currentDay.after() : currentDay.before();   //doesnt really matter which
+
+                Store.save(saveDay);
+             
+                currentDay = null;
+            }
+            else{
+                Store.save(currentDay);
+            }
+        }
     }
 
     //goes forward by one day

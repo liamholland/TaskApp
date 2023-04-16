@@ -17,7 +17,7 @@
             <Label fx:id="time"/>
          </HBox>
          <Label fx:id="description"/>
-         <!-- <Button fx:id="deleteTaskButton" onAction="#deleteThisTask">Delete</Button> -->
+         <Button fx:id="deleteTaskButton" onAction="#deleteThisTask">Delete</Button>
       </VBox>
    </children>
 </fx:root>

@@ -11,7 +11,6 @@ public class APITest {
         System.out.println(dayViewer);
 
         dayViewer.addTask(new Task("New Task", "Description", dayViewer.getCurrentDay()));
-        dayViewer.saveDay();
 
         System.out.println(dayViewer);
     }
