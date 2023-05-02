@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -15,6 +16,8 @@ public class TaskCreator extends VBox {
     @FXML private TextField name;
     @FXML private TextField time;
     @FXML private TextField description;
+    @FXML private VBox main;
+    @FXML private HBox component;
 
     public TaskCreator(PrimaryController parent) {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
@@ -34,6 +37,13 @@ public class TaskCreator extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+
+        NumberSelector hoursSelector = new NumberSelector(0, 24);
+        NumberSelector minutesSelector = new NumberSelector(0, 60, null, hoursSelector);
+        hoursSelector.setLesser(minutesSelector);
+
+        component.getChildren().add(hoursSelector);
+        component.getChildren().add(minutesSelector);
 
         name.requestFocus();
 
