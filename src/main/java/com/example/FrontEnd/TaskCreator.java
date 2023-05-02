@@ -39,8 +39,7 @@ public class TaskCreator extends VBox {
         }
 
         NumberSelector hoursSelector = new NumberSelector(0, 24);
-        NumberSelector minutesSelector = new NumberSelector(0, 60, null, hoursSelector);
-        hoursSelector.setLesser(minutesSelector);
+        NumberSelector minutesSelector = new NumberSelector(0, 60, hoursSelector);
 
         component.getChildren().add(hoursSelector);
         component.getChildren().add(minutesSelector);

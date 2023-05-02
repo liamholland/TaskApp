@@ -16,7 +16,7 @@
       <VBox>
          <Button fx:id="upButton" onAction="#up">Up</Button>
          <Label fx:id="numberDisplay"/>
-         <Button fx:id="downButton" onAction="#down"/>
+         <Button fx:id="downButton" onAction="#down">Down</Button>
       </VBox>
    </children>
 </fx:root>

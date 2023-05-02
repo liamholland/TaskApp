@@ -17,7 +17,6 @@ public class NumberSelector extends VBox {
     private int max;    //max for this counter
     private int currentNumber;  //current value
     private NumberSelector greaterUnit; //allows for overflow
-    private NumberSelector lesserUnit;  //allows for underflow   
 
     @FXML private Button upButton;  //button to increase the number
     @FXML private Button downButton;    //button to decrease the number
@@ -25,7 +24,7 @@ public class NumberSelector extends VBox {
 
     //constructor
     //min is inclusive, max is exclusive
-    public NumberSelector(int min, int max, NumberSelector lesser, NumberSelector greater) throws IllegalArgumentException{
+    public NumberSelector(int min, int max, NumberSelector greater) throws IllegalArgumentException{
         if(min > max){
             throw new IllegalArgumentException("Min cannot be greater than max");
         }
@@ -33,7 +32,6 @@ public class NumberSelector extends VBox {
         this.min = min;
         this.max = max;
         greaterUnit = greater;
-        lesserUnit = lesser;
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "task.fxml"));
@@ -59,7 +57,7 @@ public class NumberSelector extends VBox {
 
     //other constructor
     public NumberSelector(int min, int max){
-        this(min, max, null, null);
+        this(min, max, null);
     }
     
     //update the label with the current value of the counter
@@ -83,9 +81,9 @@ public class NumberSelector extends VBox {
     public void down(){
         currentNumber--;
         if(currentNumber < min){
-            currentNumber = max;
-            if(lesserUnit != null){
-                lesserUnit.down();
+            currentNumber = max - 1;
+            if(greaterUnit != null){
+                greaterUnit.down();
             }
         }
         updateDisplay();
@@ -110,9 +108,5 @@ public class NumberSelector extends VBox {
 
     public void setGreater(NumberSelector selector){
         greaterUnit = selector;
-    }
-
-    public void setLesser(NumberSelector selector){
-        lesserUnit = selector;
     }
 }
