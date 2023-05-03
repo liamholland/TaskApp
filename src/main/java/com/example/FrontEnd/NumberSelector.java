@@ -33,11 +33,12 @@ public class NumberSelector extends VBox {
         this.max = max;
         greaterUnit = greater;
 
+        //load fxml file
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "task.fxml"));
         try {
             fxmlLoader.setLocation(new URL(
-                    "file:///C:/Users/Liam/OneDrive - National University of Ireland, Galway/Coding/demo/src/main/resources/com/example/number_selector.fxml"));
+                    "file:///C:/Users/Liam/OneDrive - National University of Ireland, Galway/Coding/demo/src/main/resources/com/example/number_selector.fxml"));    //hopefully change this to a relative value at some point
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -51,7 +52,7 @@ public class NumberSelector extends VBox {
             throw new RuntimeException(exception);
         }
 
-
+        //set the initial label value
         numberDisplay.textProperty().set(Integer.toString(this.min));
     }
 

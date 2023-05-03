@@ -138,6 +138,10 @@ public class DayViewer {
     public void jumpToToday(){
         currentDay = goToDate(LocalDate.now());
     }
+
+    public void jumpToDate(LocalDate date){
+        currentDay = goToDate(date);
+    }
     
     //jump to a specified date and get the save if there is one
     private Day goToDate(LocalDate targetDate){

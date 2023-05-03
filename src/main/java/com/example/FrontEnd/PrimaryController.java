@@ -1,11 +1,14 @@
 package com.example.FrontEnd;
 
+import java.time.LocalDate;
+
 import com.example.BackEnd.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.DatePicker;
 
 //main frontend controller that manages what is displayed to the user
 public class PrimaryController {
@@ -16,6 +19,7 @@ public class PrimaryController {
 
     //completion section
     @FXML private Label currentDateLabel;
+    @FXML private DatePicker calendar;
 
     private DayViewer dayViewer;    //reference to the backend api interface
 
@@ -73,6 +77,13 @@ public class PrimaryController {
     @FXML
     private void goToNextDay(){
         dayViewer.nextDay();
+        displayTasksForDay();
+    }
+
+    @FXML
+    private void jumpToSelectedDay(){
+        LocalDate date = calendar.getValue();
+        dayViewer.jumpToDate(date);
         displayTasksForDay();
     }
 }
