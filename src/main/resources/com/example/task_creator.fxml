@@ -16,8 +16,9 @@
          <VBox fx:id="main">
             <TextField fx:id="name" promptText="Enter a Name for the Task"/>
             <TextField fx:id="description" promptText="Enter a Description for the Task"/>
-            <CheckBox fx:id="schedule" text="Schedule?"/>
+            <CheckBox fx:id="scheduleBox" text="Schedule?"/>
          </VBox>
+         <Button fx:id="saveTaskButton" onAction="#saveTask">Save Task</Button>
       </HBox>
    </children>
 </fx:root>

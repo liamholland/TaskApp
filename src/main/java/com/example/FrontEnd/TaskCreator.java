@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+import javafx.scene.control.CheckBox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,8 +19,15 @@ public class TaskCreator extends VBox {
     @FXML private TextField description;
     @FXML private VBox main;
     @FXML private HBox component;
+    @FXML private CheckBox scheduleBox;
+    @FXML private NumberSelector hoursSelector;
+    @FXML private NumberSelector minutesSelector;
+
+    private PrimaryController parent;
 
     public TaskCreator(PrimaryController parent) {
+        this.parent = parent;
+        
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
                 "task_creator.fxml"));
         try {
@@ -38,32 +46,28 @@ public class TaskCreator extends VBox {
             throw new RuntimeException(exception);
         }
 
-        NumberSelector hoursSelector = new NumberSelector(0, 24);
-        NumberSelector minutesSelector = new NumberSelector(0, 60, hoursSelector);
+        hoursSelector = new NumberSelector(0, 24);
+        minutesSelector = new NumberSelector(0, 60, hoursSelector);
+
+        hoursSelector.setVisible(false);
+        minutesSelector.setVisible(false);
 
         component.getChildren().add(hoursSelector);
         component.getChildren().add(minutesSelector);
 
-        name.requestFocus();
+        name.requestFocus();     
 
-        //add an event listener to the component to check if it can be saved when it loses focus
-        name.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if(!newVal){
-                if(isDataValid()){
-                    parent.saveTask(this);
-                }
-            }
-        });
-
-        description.focusedProperty().addListener((obs, oldVal, newVal) -> {
-            if(!newVal){
-                if(isDataValid()){
-                    parent.saveTask(this);  
-                }
-            }
-        });
+        scheduleBox.setOnAction(e -> toggleTimeSelector());
+        scheduleBox.setOnAction(e -> toggleTimeSelector());
     }
 
+    private void toggleTimeSelector(){
+        hoursSelector.setVisible(scheduleBox.isSelected());
+        minutesSelector.setVisible(scheduleBox.isSelected());
+    }
+
+    //checks if the data in the task creator is valid
+    //maybe make this react to an event and enable/disable the save button if the data is valid
     private boolean isDataValid(){
         String nameText = name.textProperty().get();
         String desText = description.textProperty().get();
@@ -79,5 +83,13 @@ public class TaskCreator extends VBox {
 
         //data is valid
         return new Task(name.textProperty().get(), description.textProperty().get(), day);
+    }
+
+    //save a task
+    @FXML
+    public void saveTask(){
+        if(isDataValid()){
+            this.parent.saveTask(this);
+        }
     }
 }

@@ -13,7 +13,7 @@
 
 <GridPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.FrontEnd.PrimaryController">
    <children>
-      <TitledPane text="Project Pane" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+      <TitledPane text="Project Pane" GridPane.columnIndex="0"  GridPane.rowIndex="0" GridPane.rowSpan="3"/>
       <VBox fx:id="completionPane" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
          <children>
             <HBox alignment="CENTER">
