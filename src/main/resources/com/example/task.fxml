@@ -14,7 +14,10 @@
       <VBox>
          <HBox>
             <Label fx:id="name"/>
-            <Label fx:id="time"/>
+            <Label text="Starts At:"/>
+            <Label fx:id="startTime"/>
+            <Label text="Ends At:"/>
+            <Label fx:id="endTime"/>
          </HBox>
          <Label fx:id="description"/>
          <Button fx:id="deleteTaskButton" onAction="#deleteThisTask">Delete</Button>

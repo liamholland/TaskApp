@@ -14,9 +14,9 @@
    xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox>
-         <Button fx:id="upButton" onAction="#up">Up</Button>
+         <Button fx:id="upButton" onAction="#up">^</Button>
          <Label fx:id="numberDisplay"/>
-         <Button fx:id="downButton" onAction="#down">Down</Button>
+         <Button fx:id="downButton" onAction="#down">v</Button>
       </VBox>
    </children>
 </fx:root>

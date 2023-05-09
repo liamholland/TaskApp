@@ -12,7 +12,8 @@ import com.example.BackEnd.Task;
 
 public class TaskComponent extends VBox {
     @FXML private Label name;
-    @FXML private Label time;
+    @FXML private Label startTime;
+    @FXML private Label endTime;
     @FXML private Label description;
 
     private PrimaryController parent;
@@ -44,7 +45,7 @@ public class TaskComponent extends VBox {
         setName(task.getName());
         
         if(task.isScheduled()){
-            setTime(task.getStartTime());
+            setTime(task.getStartTime(), task.getEndTime());
         }
 
         setDes(task.getDescription());
@@ -55,8 +56,9 @@ public class TaskComponent extends VBox {
         name.textProperty().set(value);
     }
 
-    private void setTime(String value) {
-        time.textProperty().set(value);
+    private void setTime(String start, String end) {
+        startTime.textProperty().set(start);
+        endTime.textProperty().set(end);
     }
 
     private void setDes(String value) {

@@ -10,7 +10,9 @@ import javafx.scene.control.CheckBox;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalTime;
 import com.example.BackEnd.Task;
+import javafx.scene.control.Label;
 import com.example.BackEnd.Day;
 
 public class TaskCreator extends VBox {
@@ -18,10 +20,12 @@ public class TaskCreator extends VBox {
     @FXML private TextField time;
     @FXML private TextField description;
     @FXML private VBox main;
-    @FXML private HBox component;
+    @FXML private HBox timeSelector;
     @FXML private CheckBox scheduleBox;
     @FXML private NumberSelector hoursSelector;
     @FXML private NumberSelector minutesSelector;
+    @FXML private NumberSelector durationSelector;
+    @FXML private Label durationLabel;
 
     private PrimaryController parent;
 
@@ -48,22 +52,21 @@ public class TaskCreator extends VBox {
 
         hoursSelector = new NumberSelector(0, 24);
         minutesSelector = new NumberSelector(0, 60, hoursSelector);
+        durationSelector = new NumberSelector(0, 1440);
 
-        hoursSelector.setVisible(false);
-        minutesSelector.setVisible(false);
+        timeSelector.setVisible(false);
 
-        component.getChildren().add(hoursSelector);
-        component.getChildren().add(minutesSelector);
+        timeSelector.getChildren().add(new Label("Schedule at"));
+        timeSelector.getChildren().add(hoursSelector);
+        timeSelector.getChildren().add(new Label(":"));
+        timeSelector.getChildren().add(minutesSelector);
+        timeSelector.getChildren().add(new Label("for"));
+        timeSelector.getChildren().add(durationSelector);
+        timeSelector.getChildren().add(new Label("minutes"));
 
         name.requestFocus();     
 
-        scheduleBox.setOnAction(e -> toggleTimeSelector());
-        scheduleBox.setOnAction(e -> toggleTimeSelector());
-    }
-
-    private void toggleTimeSelector(){
-        hoursSelector.setVisible(scheduleBox.isSelected());
-        minutesSelector.setVisible(scheduleBox.isSelected());
+        scheduleBox.setOnAction(e -> timeSelector.setVisible(scheduleBox.isSelected())); //add event handler to the checkbox to toggle visibility
     }
 
     //checks if the data in the task creator is valid
@@ -72,7 +75,11 @@ public class TaskCreator extends VBox {
         String nameText = name.textProperty().get();
         String desText = description.textProperty().get();
 
-        return !(desText == null || desText.equals("")) && !(nameText == null || nameText.equals(""));
+        boolean descriptionIsValid = !(desText == null || desText.equals(""));
+        boolean nameIsValid = !(nameText == null || nameText.equals(""));
+        boolean timeIsValid = (LocalTime.of(hoursSelector.getCurrent(), minutesSelector.getCurrent()).plusMinutes(durationSelector.getCurrent()).isAfter(LocalTime.now()));
+
+        return descriptionIsValid && nameIsValid && timeIsValid;
     }
 
     //turn the creator into an actual task
@@ -82,7 +89,13 @@ public class TaskCreator extends VBox {
         }
 
         //data is valid
-        return new Task(name.textProperty().get(), description.textProperty().get(), day);
+        Task task = new Task(name.textProperty().get(), description.textProperty().get(), day);
+
+        if(scheduleBox.isSelected()){
+            task.scheduleFor(LocalTime.of(hoursSelector.getCurrent(), minutesSelector.getCurrent()), durationSelector.getCurrent());
+        }
+
+        return task;
     }
 
     //save a task

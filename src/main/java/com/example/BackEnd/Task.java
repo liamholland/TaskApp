@@ -56,9 +56,10 @@ public class Task implements Serializable{
     }
 
     //used to schedule a task for a certain time
-    public void scheduleFor(LocalTime time){
+    public void scheduleFor(LocalTime time, int durationInMinutes){
         taskTime = time;
         scheduled = true;
+        numMinutes = durationInMinutes;
     }
 
     public Day getDay(){
