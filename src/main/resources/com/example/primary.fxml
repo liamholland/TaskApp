@@ -16,6 +16,7 @@
       <TitledPane text="Project Pane" GridPane.columnIndex="0"  GridPane.rowIndex="0" GridPane.rowSpan="3"/>
       <VBox fx:id="completionPane" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0">
          <children>
+            <Label fx:id="completionPercentageLabel"/>
             <HBox alignment="CENTER">
                <children>
                   <Button fx:id="navPreviousDayButton" onAction="#goToPreviousDay">Previous Day</Button>

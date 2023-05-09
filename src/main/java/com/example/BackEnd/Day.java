@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Day implements Serializable{
     private ArrayList<Task> tasks;  //the tasks assciated with this day
     private final LocalDate dateOfDay; //the date of the day
+    private double completionPercentage = 0.0;
     
     //fields to hold linked list references
     private Day before;
@@ -32,6 +33,7 @@ public class Day implements Serializable{
     public void addTask(Task t){
         if(!tasks.contains(t)){
             tasks.add(t);
+            recalculateCompletion();
         }
     }
 
@@ -39,7 +41,28 @@ public class Day implements Serializable{
     public void removeTask(Task t){
         if(tasks.contains(t) && !t.isRepetitive()){
             tasks.remove(t);
+            recalculateCompletion();
         }
+    }
+
+    public void recalculateCompletion(){
+        if(tasks.isEmpty()){
+            completionPercentage = 0;
+        }
+        else{
+            int numCompleted = 0;
+            for(Task t : tasks){
+                if(t.isCompleted()){
+                    numCompleted++;
+                }
+            }
+            completionPercentage = (numCompleted / tasks.size()) * 100;
+            System.out.println(completionPercentage);
+        }
+    }
+
+    public double getCompletionPercentage(){
+        return completionPercentage;
     }
 
     /*

@@ -20,6 +20,8 @@
             <Label fx:id="endTime"/>
          </HBox>
          <Label fx:id="description"/>
+         <Label fx:id="completedLabel" text="Completed!" visible="false"/>
+         <Button fx:id="completeTaskButton" onAction="#markComplete">Mark Complete</Button>
          <Button fx:id="deleteTaskButton" onAction="#deleteThisTask">Delete</Button>
       </VBox>
    </children>

@@ -52,7 +52,7 @@ public class TaskCreator extends VBox {
 
         hoursSelector = new NumberSelector(0, 24);
         minutesSelector = new NumberSelector(0, 60, hoursSelector);
-        durationSelector = new NumberSelector(0, 1440);
+        durationSelector = new NumberSelector(0, 1440); //number of minutes in 24 hours
 
         timeSelector.setVisible(false);
 
@@ -75,11 +75,13 @@ public class TaskCreator extends VBox {
         String nameText = name.textProperty().get();
         String desText = description.textProperty().get();
 
-        boolean descriptionIsValid = !(desText == null || desText.equals(""));
-        boolean nameIsValid = !(nameText == null || nameText.equals(""));
-        boolean timeIsValid = (LocalTime.of(hoursSelector.getCurrent(), minutesSelector.getCurrent()).plusMinutes(durationSelector.getCurrent()).isAfter(LocalTime.now()));
+        boolean nameIsValid = !(nameText == null || nameText.equals(""));   //is there valid text in the name box
+        boolean descriptionIsValid = !(desText == null || desText.equals(""));  //is there valid text in the description box
 
-        return descriptionIsValid && nameIsValid && timeIsValid;
+        //this prevents both times before the current time and also times which might stray into the next day
+        boolean timeIsValid = !scheduleBox.isSelected() || (LocalTime.of(hoursSelector.getCurrent(), minutesSelector.getCurrent()).plusMinutes(durationSelector.getCurrent()).isAfter(LocalTime.now()));
+
+        return nameIsValid && descriptionIsValid && timeIsValid;
     }
 
     //turn the creator into an actual task
@@ -100,9 +102,9 @@ public class TaskCreator extends VBox {
 
     //save a task
     @FXML
-    public void saveTask(){
+    private void saveTask(){
         if(isDataValid()){
-            this.parent.saveTask(this);
+            parent.saveTask(this);
         }
     }
 }

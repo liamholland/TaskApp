@@ -3,6 +3,7 @@ package com.example.FrontEnd;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -15,6 +16,9 @@ public class TaskComponent extends VBox {
     @FXML private Label startTime;
     @FXML private Label endTime;
     @FXML private Label description;
+    @FXML private Label completedLabel;
+    @FXML private Button completeTaskButton;
+    @FXML private Button deleteTaskButton;
 
     private PrimaryController parent;
     private Task task;
@@ -50,6 +54,9 @@ public class TaskComponent extends VBox {
 
         setDes(task.getDescription());
 
+        completeTaskButton.setVisible(!task.isCompleted());
+        deleteTaskButton.setVisible(!task.isCompleted());
+        completedLabel.setVisible(task.isCompleted());
     }
 
     private void setName(String value) {
@@ -69,5 +76,14 @@ public class TaskComponent extends VBox {
     //delete this task from its day
     private void deleteThisTask(){
         parent.deleteTask(task);
+    }
+
+    @FXML
+    public void markComplete(){
+        completeTaskButton.setVisible(false);
+        deleteTaskButton.setVisible(false);
+        completedLabel.setVisible(true);
+        task.markComplete();
+        parent.refreshCompletion();
     }
 }

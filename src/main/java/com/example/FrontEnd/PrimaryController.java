@@ -19,6 +19,7 @@ public class PrimaryController {
 
     //completion section
     @FXML private Label currentDateLabel;
+    @FXML private Label completionPercentageLabel;
     @FXML private DatePicker calendar;
 
     private DayViewer dayViewer;    //reference to the backend api interface
@@ -48,6 +49,10 @@ public class PrimaryController {
         dayViewer = d;
     }
 
+    public void refreshCompletion(){
+        completionPercentageLabel.textProperty().set(String.format("%.2f", dayViewer.getCurrentDay().getCompletionPercentage()));
+    }
+
     @FXML
     private void createNewTask() {
         createTaskButton.setDisable(true);
@@ -65,6 +70,7 @@ public class PrimaryController {
                 TaskComponent component = new TaskComponent(task, this);
                 taskSection.getChildren().add(component);
             }  
+            refreshCompletion();
         }
     }
 

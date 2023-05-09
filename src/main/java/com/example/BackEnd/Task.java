@@ -48,6 +48,9 @@ public class Task implements Serializable{
 
     public void markComplete(){
         complete = true;
+        taskDay.recalculateCompletion();
+        System.out.println(taskDay);    //for some reason completed tasks disappear unless this line is here - fucking paranormal bullshit the compiler has to see to believe
+        Store.save(taskDay);
     }
 
     //is the task scheduled
