@@ -196,6 +196,11 @@ public class DayViewer {
         return currentDay;
     }
 
+    //in case any accessor of the day viewer needs to save the day after some operation
+    public void saveCurrentDay(){
+        Store.save(currentDay);
+    }
+
     @Override
     public String toString(){
         StringBuilder s = new StringBuilder();

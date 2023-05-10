@@ -80,10 +80,10 @@ public class TaskComponent extends VBox {
 
     @FXML
     public void markComplete(){
+        task.markComplete();
+        parent.refreshCompletion();
         completeTaskButton.setVisible(false);
         deleteTaskButton.setVisible(false);
         completedLabel.setVisible(true);
-        task.markComplete();
-        parent.refreshCompletion();
     }
 }

@@ -50,14 +50,13 @@ public class Day implements Serializable{
             completionPercentage = 0;
         }
         else{
-            int numCompleted = 0;
+            double numCompleted = 0;
             for(Task t : tasks){
                 if(t.isCompleted()){
                     numCompleted++;
                 }
             }
             completionPercentage = (numCompleted / tasks.size()) * 100;
-            System.out.println(completionPercentage);
         }
     }
 
@@ -134,7 +133,7 @@ public class Day implements Serializable{
         s.append(getDateAndDay());
         s.append("\n");
         s.append("Tasks: \n");
-        for(Task t : getTasks()){
+        for(Task t : tasks){
             s.append(t);
             s.append("\n");
         }

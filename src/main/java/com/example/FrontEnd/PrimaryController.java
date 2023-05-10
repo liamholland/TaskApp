@@ -50,6 +50,8 @@ public class PrimaryController {
     }
 
     public void refreshCompletion(){
+        dayViewer.saveCurrentDay();
+        dayViewer.getCurrentDay().recalculateCompletion();
         completionPercentageLabel.textProperty().set(String.format("%.2f", dayViewer.getCurrentDay().getCompletionPercentage()));
     }
 
@@ -69,7 +71,8 @@ public class PrimaryController {
             for (Task task : tasks) {
                 TaskComponent component = new TaskComponent(task, this);
                 taskSection.getChildren().add(component);
-            }  
+            }
+            dayViewer.getCurrentDay().recalculateCompletion();
             refreshCompletion();
         }
     }
