@@ -90,11 +90,33 @@ public class DayViewer {
 
     //add a task to the current day
     public void addTask(Task task){
-        if(currentDay == null){
-            createDay();
+        if(task.isRepetitive()){
+            //add it to all the relevant days
+
+            LocalDate startDate = currentDate;  //save the day the user is on
+
+            //loop over the pattern
+            for(int i = 0; i < 30; i += task.getRepeatPattern()){
+                currentDay = goToDate(startDate.plusDays(i));
+                if(currentDay == null){
+                    createDay();
+                }
+                task.setDay(currentDay);
+                currentDay.addTask(task);
+                Store.save(currentDay);
+            }
+
+            currentDay = goToDate(startDate);
+        }
+        else{
+            if(currentDay == null){
+                createDay();
+            }
+            
+            task.setDay(currentDay);
+            currentDay.addTask(task);
         }
         
-        currentDay.addTask(task);
         Store.save(currentDay);
     }
 

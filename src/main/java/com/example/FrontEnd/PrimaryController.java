@@ -27,7 +27,7 @@ public class PrimaryController {
     //allows child elements to save a task
     public void saveTask(TaskCreator creator){
         //add a task, provided by the task creator, with the current day, which may have to be created
-        dayViewer.addTask(creator.getTask(dayViewer.getCurrentDay() == null ? new Day(dayViewer.getCurrentDate()) : dayViewer.getCurrentDay()));
+        dayViewer.addTask(creator.convertToTask());
 
         //remove the creator from the gui
         taskSection.getChildren().remove(creator);

@@ -10,16 +10,21 @@ public class Task implements Serializable{
     private String taskDescription;
     private Day taskDay;     //day of the task
     private boolean scheduled;    //is the task scheduled for a certain time
-    private boolean repetitive;   //is the task repeated every day
+    private boolean repetitive;   //is the task repeated every certain number of days for a month (30 days)
+    private int numDays;    //number of days on which the task will appear again
     private LocalTime taskTime;     //start time of the task - used if scheduled
     private long numMinutes;         //number of minutes to be spent on the task
     private boolean complete;   //has the task been completed
-    
-    public Task(String name, String description, Day day){
+
+    public Task(String name, String description){
         taskName = name;
         taskDescription = description;
-        taskDay = day;
         complete = false;
+    }
+
+    public Task(String name, String description, Day day){
+        this(name, description);
+        taskDay = day;
     }
 
     public Task(String name, String description, Day day, LocalTime time, long duration){
@@ -38,8 +43,13 @@ public class Task implements Serializable{
         return repetitive;
     }
 
-    public void markRepetitive(){
-        repetitive = true;
+    public void markRepetitive(boolean value){
+        repetitive = value;
+    }
+
+    public void markRepetitive(boolean value, int num){
+        numDays = num;
+        markRepetitive(value);
     }
 
     public boolean isCompleted(){
@@ -60,6 +70,10 @@ public class Task implements Serializable{
         taskTime = time;
         scheduled = true;
         numMinutes = durationInMinutes;
+    }
+
+    public void setDay(Day day){
+        taskDay = day;
     }
 
     public Day getDay(){
@@ -84,6 +98,10 @@ public class Task implements Serializable{
         if(d != null){
             taskDescription = d;
         }
+    }
+
+    public int getRepeatPattern(){
+        return repetitive == false ? -1 : numDays;   //return -1 if the task is not repetitive
     }
 
     @Override

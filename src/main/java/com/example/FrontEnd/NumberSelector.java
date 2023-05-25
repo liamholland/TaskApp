@@ -31,6 +31,7 @@ public class NumberSelector extends VBox {
         
         this.min = min;
         this.max = max;
+        currentNumber = min;
         greaterUnit = greater;
 
         //load fxml file

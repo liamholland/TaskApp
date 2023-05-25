@@ -39,7 +39,7 @@ public class Day implements Serializable{
 
     //remove a task from the current day
     public void removeTask(Task t){
-        if(tasks.contains(t) && !t.isRepetitive()){
+        if(tasks.contains(t)){
             tasks.remove(t);
             recalculateCompletion();
         }

@@ -17,9 +17,15 @@
             <TextField fx:id="name" promptText="Enter a Name for the Task"/>
             <TextField fx:id="description" promptText="Enter a Description for the Task"/>
             <CheckBox fx:id="scheduleBox" text="Schedule?"/>
+            <CheckBox fx:id="repeatBox" text="Repeat?"/>
             <Button fx:id="saveTaskButton" onAction="#saveTask">Save Task</Button>  
          </VBox>
          <HBox fx:id="timeSelector" alignment="CENTER">
+         <padding>
+            <Insets top="10" bottom="10" left="10" right="10"/>
+         </padding>
+         </HBox>
+         <HBox fx:id="dayPatternSelector" alignment="CENTER">
          <padding>
             <Insets top="10" bottom="10" left="10" right="10"/>
          </padding>
