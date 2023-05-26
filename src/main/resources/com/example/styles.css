@@ -1,5 +1,5 @@
 .button {
-    -fx-background-color: cadetblue;
+    -fx-background-color: red;
     -fx-transition: -fx-background-color 1s;
 }
 

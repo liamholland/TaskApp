@@ -13,11 +13,15 @@
    <children>
       <VBox>
          <Label fx:id="name"/>
-         <HBox fx:id="timeInfoArea">
-            <Label text="Starts At:"/>
-            <Label fx:id="startTime"/>
-            <Label text="Ends At:"/>
-            <Label fx:id="endTime"/>
+         <HBox>
+            <HBox fx:id="startTimeArea">
+               <Label text="Starts At:"/>
+               <Label fx:id="startTime"/>
+            </HBox>
+            <HBox fx:id="endTimeArea">
+               <Label text="Ends At:"/>
+               <Label fx:id="endTime"/>
+            </HBox>
          </HBox>
          <Label fx:id="description"/>
          <Label fx:id="duration"/>

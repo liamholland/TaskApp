@@ -9,11 +9,8 @@ import java.util.Hashtable;
 public class Project implements Serializable{
     private Hashtable<Task, Integer> tasksWithDurations;    //list of tasks and their associated estimated duration in days
     private double completionPercentage;
-    private int ID;
 
     public Project(){
-        Project[] loadedProjects = Store.loadProjects();
-        ID = loadedProjects == null ? 1 : loadedProjects.length + 1;
         completionPercentage = 0.0;
     }
 
@@ -40,14 +37,5 @@ public class Project implements Serializable{
             if(t.isCompleted()) numCompleted++;
         }
         completionPercentage = (numCompleted / tasksWithDurations.size()) * 100;
-    }
-
-    @Override
-    public boolean equals(Object o){
-        if(!(o instanceof Project)){
-            return false;
-        }
-
-        return ((Project)o).ID == this.ID;
     }
 }

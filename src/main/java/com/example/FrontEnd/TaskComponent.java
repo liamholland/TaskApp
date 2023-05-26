@@ -21,7 +21,8 @@ public class TaskComponent extends VBox {
     @FXML private Label duration;
     @FXML private Button completeTaskButton;
     @FXML private Button deleteTaskButton;
-    @FXML private HBox timeInfoArea;
+    @FXML private HBox startTimeArea;
+    @FXML private HBox endTimeArea;
 
     private PrimaryController parent;
     private Task task;
@@ -59,10 +60,13 @@ public class TaskComponent extends VBox {
 
         setDuration(task.getDuration());
 
+        //set the visibility of the various components
         completeTaskButton.setVisible(!task.isCompleted());
         deleteTaskButton.setVisible(!task.isCompleted());
         completedLabel.setVisible(task.isCompleted());
-        timeInfoArea.setVisible(task.isScheduled());
+        startTimeArea.setVisible(task.isScheduled());
+        endTimeArea.setVisible(task.isScheduled() && task.getDuration() > 0);
+        duration.setVisible(task.getDuration() > 0);
     }
 
     private void setDuration(long durationInMinutes) {

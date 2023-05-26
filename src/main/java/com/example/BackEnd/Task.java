@@ -8,13 +8,19 @@ public class Task implements Serializable{
     //Is an object that can be created and scheduled on a certain date and time
     private String taskName;
     private String taskDescription;
+
     private Day taskDay;     //day of the task
+
     private boolean scheduled;    //is the task scheduled for a certain time
     private boolean repetitive;   //is the task repeated every certain number of days for a month (30 days)
     private int numDays;    //number of days on which the task will appear again
     private LocalTime taskTime;     //start time of the task - used if scheduled
     private long numMinutes;         //number of minutes to be spent on the task
+
     private boolean complete;   //has the task been completed
+
+    private boolean belongsToProject;   //does the task belong to a project
+    private Project project;    //if so, which one
 
     public Task(String name, String description){
         taskName = name;
@@ -27,15 +33,29 @@ public class Task implements Serializable{
         taskDay = day;
     }
 
-    public Task(String name, String description, Day day, LocalTime time, long duration){
+    public Task(String name, String description, Day day, LocalTime time, long duration, Project project){
         this(name, description, day);
         taskTime = time;
         numMinutes = duration;
         scheduled = true;
+        belongsToProject = true;
+        this.project = project;
     }
 
     public String getName(){
         return taskName;
+    }
+
+    public void setProject(Project project){
+        this.project = project;
+    }
+
+    public Project getProject(){
+        return project;
+    }
+
+    public boolean belongsToProject(){
+        return belongsToProject;
     }
 
     //is the task repetitive - i.e. does it occur every day
