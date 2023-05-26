@@ -9,13 +9,14 @@ import java.util.ArrayList;
 public class Day implements Serializable{
     private ArrayList<Task> tasks;  //the tasks assciated with this day
     private final LocalDate dateOfDay; //the date of the day
-    private double completionPercentage = 0.0;
+    private double completionPercentage;
     
     //fields to hold linked list references
     private Day before;
     private Day after;
     
     public Day(LocalDate date) {
+        completionPercentage = 0.0;
         tasks = new ArrayList<Task>();
         dateOfDay = date;
     }

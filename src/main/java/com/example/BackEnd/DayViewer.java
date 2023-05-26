@@ -16,7 +16,7 @@ public class DayViewer {
 
     //constructor - load the current day on initialisation
     public DayViewer() {
-        currentDay = Store.load();  //read the current day from the store
+        currentDay = Store.loadDays();  //read the current day from the store
 
         //go to the current date if the loaded day is null or not the current date
         if(currentDay == null || !currentDay.getDate().equals(LocalDate.now())){
@@ -30,12 +30,12 @@ public class DayViewer {
     private void createDay(){
         Day saveDay = new Day(currentDate);
 
-        Day searchPoint = Store.load(); //start at the last saved day
+        Day searchPoint = Store.loadDays(); //start at the last saved day
 
         //insert it into the linked list
         if(searchPoint == null){   //if there is no linked list
             currentDay = saveDay;    //just set current day and return
-            Store.save(currentDay);
+            Store.saveDays(currentDay);
             return;
         }
         
@@ -85,7 +85,7 @@ public class DayViewer {
         currentDay = saveDay;
 
         //save the linked list back to the save file
-        Store.save(currentDay);
+        Store.saveDays(currentDay);
     }
 
     //add a task to the current day
@@ -103,7 +103,7 @@ public class DayViewer {
                 }
                 task.setDay(currentDay);
                 currentDay.addTask(task);
-                Store.save(currentDay);
+                Store.saveDays(currentDay);
             }
 
             currentDay = goToDate(startDate);
@@ -117,7 +117,7 @@ public class DayViewer {
             currentDay.addTask(task);
         }
         
-        Store.save(currentDay);
+        Store.saveDays(currentDay);
     }
 
     //remove a task from the day
@@ -137,12 +137,12 @@ public class DayViewer {
                 
                 Day saveDay = currentDay.before() == null ? currentDay.after() : currentDay.before();   //doesnt really matter which
 
-                Store.save(saveDay);
+                Store.saveDays(saveDay);
              
                 currentDay = null;
             }
             else{
-                Store.save(currentDay);
+                Store.saveDays(currentDay);
             }
         }
     }
@@ -167,7 +167,7 @@ public class DayViewer {
     
     //jump to a specified date and get the save if there is one
     private Day goToDate(LocalDate targetDate){
-        Day day = currentDay == null ? Store.load() : currentDay;   //create a new day and start with the current date or the last saved day
+        Day day = currentDay == null ? Store.loadDays() : currentDay;   //create a new day and start with the current date or the last saved day
         currentDay = null;  //reset the current day
 
         if(day == null){
@@ -220,7 +220,7 @@ public class DayViewer {
 
     //in case any accessor of the day viewer needs to save the day after some operation
     public void saveCurrentDay(){
-        Store.save(currentDay);
+        Store.saveDays(currentDay);
     }
 
     @Override
