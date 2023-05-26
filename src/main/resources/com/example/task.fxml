@@ -12,14 +12,15 @@
    xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox>
-         <HBox>
-            <Label fx:id="name"/>
+         <Label fx:id="name"/>
+         <HBox fx:id="timeInfoArea">
             <Label text="Starts At:"/>
             <Label fx:id="startTime"/>
             <Label text="Ends At:"/>
             <Label fx:id="endTime"/>
          </HBox>
          <Label fx:id="description"/>
+         <Label fx:id="duration"/>
          <Label fx:id="completedLabel" text="Completed!" visible="false"/>
          <Button fx:id="completeTaskButton" onAction="#markComplete">Mark Complete</Button>
          <Button fx:id="deleteTaskButton" onAction="#deleteThisTask">Delete</Button>

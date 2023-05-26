@@ -20,12 +20,17 @@
             <CheckBox fx:id="repeatBox" text="Repeat?"/>
             <Button fx:id="saveTaskButton" onAction="#saveTask">Save Task</Button>  
          </VBox>
-         <HBox fx:id="timeSelector" alignment="CENTER">
+         <HBox fx:id="timeSelectorArea" alignment="CENTER">
          <padding>
             <Insets top="10" bottom="10" left="10" right="10"/>
          </padding>
          </HBox>
-         <HBox fx:id="dayPatternSelector" alignment="CENTER">
+         <HBox fx:id="durationSelectorArea" alignment="CENTER">
+         <padding>
+            <Insets top="10" bottom="10" left="10" right="10"/>
+         </padding>
+         </HBox>
+         <HBox fx:id="dayPatternSelectorArea" alignment="CENTER">
          <padding>
             <Insets top="10" bottom="10" left="10" right="10"/>
          </padding>

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -17,8 +18,10 @@ public class TaskComponent extends VBox {
     @FXML private Label endTime;
     @FXML private Label description;
     @FXML private Label completedLabel;
+    @FXML private Label duration;
     @FXML private Button completeTaskButton;
     @FXML private Button deleteTaskButton;
+    @FXML private HBox timeInfoArea;
 
     private PrimaryController parent;
     private Task task;
@@ -54,9 +57,16 @@ public class TaskComponent extends VBox {
 
         setDes(task.getDescription());
 
+        setDuration(task.getDuration());
+
         completeTaskButton.setVisible(!task.isCompleted());
         deleteTaskButton.setVisible(!task.isCompleted());
         completedLabel.setVisible(task.isCompleted());
+        timeInfoArea.setVisible(task.isScheduled());
+    }
+
+    private void setDuration(long durationInMinutes) {
+        duration.textProperty().set(Long.toString(durationInMinutes) + " Minutes");
     }
 
     private void setName(String value) {

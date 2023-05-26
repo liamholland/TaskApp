@@ -69,7 +69,15 @@ public class Task implements Serializable{
     public void scheduleFor(LocalTime time, int durationInMinutes){
         taskTime = time;
         scheduled = true;
+        setDuration(durationInMinutes);
+    }
+
+    public void setDuration(int durationInMinutes){
         numMinutes = durationInMinutes;
+    }
+
+    public long getDuration(){
+        return numMinutes;
     }
 
     public void setDay(Day day){

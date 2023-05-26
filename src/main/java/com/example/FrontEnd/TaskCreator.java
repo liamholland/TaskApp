@@ -19,8 +19,9 @@ public class TaskCreator extends VBox {
     @FXML private TextField time;
     @FXML private TextField description;
     @FXML private VBox main;
-    @FXML private HBox timeSelector;
-    @FXML private HBox dayPatternSelector;
+    @FXML private HBox timeSelectorArea;
+    @FXML private HBox durationSelectorArea;
+    @FXML private HBox dayPatternSelectorArea;
     @FXML private CheckBox scheduleBox;
     @FXML private CheckBox repeatBox;
     @FXML private NumberSelector hoursSelector;
@@ -57,29 +58,30 @@ public class TaskCreator extends VBox {
         minutesSelector = new NumberSelector(0, 60, hoursSelector);
         durationSelector = new NumberSelector(0, 1440); //number of minutes in 24 hours
 
-        timeSelector.setVisible(false);
+        durationSelectorArea.getChildren().add(new Label("Spend"));
+        durationSelectorArea.getChildren().add(durationSelector);
+        durationSelectorArea.getChildren().add(new Label("minutes on this task"));
 
-        timeSelector.getChildren().add(new Label("Schedule at"));
-        timeSelector.getChildren().add(hoursSelector);
-        timeSelector.getChildren().add(new Label(" : "));
-        timeSelector.getChildren().add(minutesSelector);
-        timeSelector.getChildren().add(new Label("for"));
-        timeSelector.getChildren().add(durationSelector);
-        timeSelector.getChildren().add(new Label("minutes"));
+        timeSelectorArea.setVisible(false);
+
+        timeSelectorArea.getChildren().add(new Label("Schedule at"));
+        timeSelectorArea.getChildren().add(hoursSelector);
+        timeSelectorArea.getChildren().add(new Label(" : "));
+        timeSelectorArea.getChildren().add(minutesSelector);
 
         numDaySelector = new NumberSelector(1, 7);
 
-        dayPatternSelector.setVisible(false);
+        dayPatternSelectorArea.setVisible(false);
 
-        dayPatternSelector.getChildren().add(new Label("Repeat every"));
-        dayPatternSelector.getChildren().add(numDaySelector);
-        dayPatternSelector.getChildren().add(new Label("days"));
+        dayPatternSelectorArea.getChildren().add(new Label("Repeat every"));
+        dayPatternSelectorArea.getChildren().add(numDaySelector);
+        dayPatternSelectorArea.getChildren().add(new Label("days"));
 
         name.requestFocus();     
 
         //add event handlers to the relevant checkboxes to toggle visibility
-        scheduleBox.setOnAction(e -> timeSelector.setVisible(scheduleBox.isSelected()));
-        repeatBox.setOnAction(e -> dayPatternSelector.setVisible(repeatBox.isSelected()));
+        scheduleBox.setOnAction(e -> timeSelectorArea.setVisible(scheduleBox.isSelected()));
+        repeatBox.setOnAction(e -> dayPatternSelectorArea.setVisible(repeatBox.isSelected()));
     }
 
     //checks if the data in the task creator is valid
@@ -108,6 +110,9 @@ public class TaskCreator extends VBox {
 
         if(scheduleBox.isSelected()){
             task.scheduleFor(LocalTime.of(hoursSelector.getCurrent(), minutesSelector.getCurrent()), durationSelector.getCurrent());
+        }
+        else{
+            task.setDuration(durationSelector.getCurrent());
         }
 
         if(repeatBox.isSelected()){
