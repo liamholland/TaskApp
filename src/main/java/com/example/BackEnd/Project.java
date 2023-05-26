@@ -18,10 +18,10 @@ public class Project implements Serializable{
     public void addTaskToProject(Task task, int durationInDays){
         if(!tasksWithDurations.keySet().contains(task)){
             tasksWithDurations.put(task, durationInDays);
+            task.setProject(this);
+            recalculatePrecentageCompletion();
         }
-
-        recalculatePrecentageCompletion();
-    }   
+    }
 
     public Task[] getTasks(){
         return tasksWithDurations.keySet().toArray(new Task[0]);
