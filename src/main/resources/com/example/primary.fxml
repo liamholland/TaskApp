@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -15,10 +17,23 @@
       <!-- Projects which include tasks that are on the current day -->
       <VBox fx:id="projectPane" alignment="TOP_CENTER" prefWidth="100.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.rowSpan="2147483647">
          <children>
-            <Label text="Projects on this day:" />
+            <Label contentDisplay="CENTER" minWidth="-Infinity" prefHeight="22.0" prefWidth="109.0" text="Projects on this day" textAlignment="CENTER" textOverrun="CLIP" />
+            <ScrollPane hbarPolicy="NEVER" minHeight="-Infinity" prefHeight="348.0" prefWidth="100.0" style="-fx-: blue;">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
+              </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </ScrollPane>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="See All Projects" textAlignment="CENTER">
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+            </Button>
          </children>
          <padding>
-            <Insets bottom="10" left="10" right="10" top="10" />
+            <Insets top="10.0" />
          </padding>
       </VBox>
 

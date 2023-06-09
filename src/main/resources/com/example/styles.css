@@ -1,12 +1,29 @@
-.button {
-    -fx-background-color: red;
-    -fx-transition: -fx-background-color 1s;
+Button {
+    -fx-background-color: rgb(234, 176, 69);
 }
 
-.button:hover {
-    -fx-background-color: blue;
+GridPane {
+    -fx-background-color: rgb(60, 60, 60);
 }
 
-.titledpane {
-    -fx-background-color: red;
+ScrollPane {
+    -fx-background: rgb(60, 60, 60);
+    -fx-border-color: rgb(60, 60, 60);
+}
+
+Label {
+    -fx-text-fill: white;
+}
+
+VBox {
+    -fx-background: rgb(60, 60, 60);
+}
+
+CheckBox {
+    -fx-text-fill: white;
+}
+
+TextField {
+    -fx-opacity: 0.15;
+    -fx-text-fill: blue;
 }

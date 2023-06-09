@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8.0.171"
-   xmlns:fx="http://javafx.com/fxml/1">
+<fx:root style="-fx-background: rgb(45, 45, 45);" stylesheets="@styles.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox>
-         <Button fx:id="upButton" onAction="#up">^</Button>
-         <Label fx:id="numberDisplay"/>
-         <Button fx:id="downButton" onAction="#down">v</Button>
+      <VBox spacing="4.0">
+         <Button fx:id="upButton" onAction="#up" prefHeight="25.0" prefWidth="25.0" textAlignment="CENTER">^</Button>
+         <Label fx:id="numberDisplay" />
+         <Button fx:id="downButton" onAction="#down" prefHeight="25.0" prefWidth="25.0">v</Button>
       </VBox>
    </children>
 </fx:root>

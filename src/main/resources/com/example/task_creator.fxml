@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8.0.171"
-   xmlns:fx="http://javafx.com/fxml/1">
+<fx:root style="-fx-border-color: white; -fx-border-radius: 15px;" stylesheets="@styles.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox fx:id="component">
-         <VBox fx:id="main">
-            <TextField fx:id="name" promptText="Enter a Name for the Task"/>
-            <TextField fx:id="description" promptText="Enter a Description for the Task"/>
-            <CheckBox fx:id="scheduleBox" text="Schedule?"/>
-            <CheckBox fx:id="repeatBox" text="Repeat?"/>
+      <HBox fx:id="component" spacing="5.0">
+         <VBox fx:id="main" spacing="4.0">
+            <TextField fx:id="name" promptText="Enter a Name for the Task" />
+            <TextField fx:id="description" promptText="Enter a Description for the Task" />
+            <CheckBox fx:id="scheduleBox" text="Schedule?" />
+            <CheckBox fx:id="repeatBox" text="Repeat?" />
             <Button fx:id="saveTaskButton" onAction="#saveTask">Save Task</Button>  
          </VBox>
-         <HBox fx:id="timeSelectorArea" alignment="CENTER">
+         <HBox fx:id="timeSelectorArea" alignment="CENTER" spacing="4.0">
          <padding>
-            <Insets top="10" bottom="10" left="10" right="10"/>
+            <Insets bottom="10" left="10" right="10" top="10" />
          </padding>
          </HBox>
-         <HBox fx:id="durationSelectorArea" alignment="CENTER">
+         <HBox fx:id="durationSelectorArea" alignment="CENTER" spacing="4.0">
          <padding>
-            <Insets top="10" bottom="10" left="10" right="10"/>
+            <Insets bottom="10" left="10" right="10" top="10" />
          </padding>
          </HBox>
-         <HBox fx:id="dayPatternSelectorArea" alignment="CENTER">
+         <HBox fx:id="dayPatternSelectorArea" alignment="CENTER" spacing="4.0">
          <padding>
-            <Insets top="10" bottom="10" left="10" right="10"/>
+            <Insets bottom="10" left="10" right="10" top="10" />
          </padding>
          </HBox>
       </HBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
 </fx:root>
